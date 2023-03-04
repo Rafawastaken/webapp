@@ -1,0 +1,58 @@
+{% extends './admin/base.html' %} {% block content %}
+<div class="container">
+  <div class="row mt-3 mb-3">
+    <div class="col-9">
+      <div class="display-5">User Management</div>
+    </div>
+    <div class="col-3">
+      <a
+        href="{{url_for('admin.register')}}"
+        class="btn btn-outline-dark form-control mt-3"
+        >Add User</a
+      >
+    </div>
+  </div>
+  <hr class="mb-4" />
+  <div class="row mt-3">
+    <table class="table table-secondary table-striped text-center">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Username</th>
+          <th scope="col">Creation Date</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <th>{{user.username.title()}}</th>
+          <td>{{user.creation_date}}</td>
+          <td>
+            <a
+              href="#"
+              class="btn btn-sm btn-outline-primary form-control disabled"
+              >Edit</a
+            >
+          </td>
+          <td>
+            {% if current_user.id != user.id %}
+            <form
+              action="{{url_for('admin.delete_user', id = user.id)}}"
+              method="POST"
+            >
+              <input
+                type="submit"
+                class="btn btn-sm btn-outline-danger form-control"
+                value="Del"
+              />
+            </form>
+            {% else %} <span class="fw-bold h5">-</span> {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
