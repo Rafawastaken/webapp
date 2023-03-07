@@ -1,44 +1,44 @@
 {% extends './admin/base.html' %} {% block content %}
-<div class="container">
-  <div class="row mt-3 mb-3">
-    <div class="display-5">Welcome {{current_user.username}}!</div>
+
+<div class="row mt-3 mb-3">
+  <div class="display-5">Welcome {{current_user.username}}!</div>
+</div>
+<hr class="mb-4" />
+<div class="row mt-3">
+  <div class="col-sm-4 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Users</h5>
+        <hr />
+        <p class="card-text">Manage allowed users in website</p>
+        <a
+          href="{{url_for('admin.users')}}"
+          class="mt-3 btn btn-dark form-control"
+          >Go to Users</a
+        >
+      </div>
+    </div>
   </div>
-  <hr class="mb-4" />
-  <div class="row mt-3">
-    <div class="col-sm-4 mb-3 mb-sm-0">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Users</h5>
-          <hr />
-          <p class="card-text">Manage allowed users in website</p>
-          <a
-            href="{{url_for('admin.users')}}"
-            class="mt-3 btn btn-dark form-control"
-            >Go to Users</a
-          >
-        </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Games</h5>
+        <hr />
+        <p class="card-text">Manage games added to website</p>
+        <a href="#" class="btn btn-dark mt-3 form-control">Go to Games</a>
       </div>
     </div>
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Games</h5>
-          <hr />
-          <p class="card-text">Manage games added to website</p>
-          <a href="#" class="btn btn-dark mt-3 form-control">Go to Games</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Config</h5>
-          <hr />
-          <p class="card-text">Config website settings.</p>
-          <a href="#" class="btn btn-dark mt-3 form-control">Go to Config</a>
-        </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Config</h5>
+        <hr />
+        <p class="card-text">Config website settings.</p>
+        <a href="#" class="btn btn-dark mt-3 form-control">Go to Config</a>
       </div>
     </div>
   </div>
 </div>
+
 {% endblock %}
