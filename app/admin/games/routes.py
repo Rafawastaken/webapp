@@ -37,6 +37,15 @@ def genres():
 
     return render_template('./admin/pages/games/genres.html', form = form, title = title, genres = genres)
 
+# Delte genre
+@games_admin.route('/delete-genre/<int:id>', methods = ['POST'])
+@login_required
+def delete_genre(id):
+    genre_delete = Genre.query.filter_by(id = id).first()
+    db.session.delete(genre_delete)
+    db.session.commit()
+    flash("Genre was deleted!", "success")
+    return redirect(url_for('games_admin.genres'))
 
 # Add games
 @games_admin.route('/add-game', methods = ['POST', 'GET'])
