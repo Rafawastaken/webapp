@@ -1,1 +1,41 @@
-game list
+{% extends './admin/base.html' %} {% block content %}
+
+<div class="row mt-3 mb-3">
+  <div class="col-8">
+    <div class="display-5">Games Management</div>
+  </div>
+  <div class="col-2">
+    <a
+      href="{{url_for('games_admin.genres')}}"
+      class="btn btn-outline-dark form-control mt-3"
+      >Genres</a
+    >
+  </div>
+  <div class="col-2">
+    <a
+      href="{{url_for('admin.register')}}"
+      class="btn btn-outline-dark form-control mt-3"
+      >Add Game</a
+    >
+  </div>
+</div>
+<hr class="mb-4" />
+<div class="row mt-3">
+  <table class="table table-secondary table-striped text-center">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Game Title</th>
+        <th scope="col">Release</th>
+        <th scope="col">Added</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for game in games %} {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
