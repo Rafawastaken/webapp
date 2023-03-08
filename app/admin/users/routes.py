@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .forms import RegisterForm, LoginForm
-from .models import Users
+from .models import User
 
 from app import app, db, bcrypt
 from flask_login import login_required, login_user, logout_user, current_user
@@ -13,7 +13,7 @@ users_admin = Blueprint('admin', __name__)
 # Users
 @users_admin.route('/users', methods = ['POST', 'GET'])
 def users():
-    users = Users.query.all()
+    users = User.query.all()
     return render_template('./admin/pages/users/users.html', users = users)
 
 
@@ -27,7 +27,7 @@ def register():
     if form.validate_on_submit():
         hash_password = bcrypt.generate_password_hash(form.password.data)
 
-        new_user = Users(
+        new_user = User(
             username = form.username.data,
             password = hash_password
         )
@@ -46,7 +46,7 @@ def register():
 @login_required
 def edit_user(id):
     form = RegisterForm()
-    user = Users.query.filter_by(id = id).first()
+    user = User.query.filter_by(id = id).first()
     title = f"Edit {user.username} profile"
 
     if form.validate_on_submit():
@@ -63,7 +63,7 @@ def edit_user(id):
 # Delete User
 @users_admin.route('/admin/delete-user/<int:id>', methods = ['POST'])
 def delete_user(id):
-    user_delete = Users.query.filter_by(id = id).first()
+    user_delete = User.query.filter_by(id = id).first()
     db.session.delete(user_delete)
     db.session.commit()
     flash(f"{user_delete.username} was deleted from website", 'success')

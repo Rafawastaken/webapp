@@ -4,9 +4,9 @@ from datetime import datetime
 
 @login_manager.user_loader
 def user_loader(user_id):
-    return Users.query.get(user_id)
+    return User.query.get(user_id)
 
-class Users(db.Model, UserMixin):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50),unique=True, nullable=False)
     password = db.Column(db.String(180),unique=False, nullable=False)

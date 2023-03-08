@@ -3,7 +3,7 @@ from flask_login import login_required, logout_user, login_user
 from .forms import LoginForm
 
 from app import bcrypt
-from ..users.models import Users
+from ..users.models import User
 
 
 land_admin = Blueprint('land_admin', __name__)
@@ -26,7 +26,7 @@ def login():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        user = Users.query.filter_by(username = username).first()
+        user = User.query.filter_by(username = username).first()
 
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user)
@@ -43,4 +43,4 @@ def login():
 def logout():
     logout_user()
     flash("Goodbye!", "success")
-    return redirect(url_for("land_admin.landing"))
+    return redirect(url_for("land_admin.login"))
