@@ -8,7 +8,7 @@ class AddGameForm(FlaskForm):
     rating = StringField('Rating', [validators.DataRequired()])
     image = StringField('image', [validators.DataRequired()])
     release_data = StringField('Release Date', [validators.DataRequired()])
-    download_link = StringField('Download Link')
+    download_link = StringField('Download Link', [validators.DataRequired()])
 
 # Form to add genres
 class AddGenreForm(FlaskForm):

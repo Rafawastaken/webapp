@@ -26,9 +26,23 @@ def add_game():
     genres = Genre.query.all()
 
     if form.validate_on_submit():
-        flash("Game added with successfully!", "success")
-        return redirect(url_for('games_admin.game_list'))
+        genre_selected = request.form.get('genre')
+ 
+        new_game = Game(
+            game_id = form.game_id.data,
+            name = form.name.data,
+            release_data = form.release_data.data,
+            rating = form.rating.data,
+            genre_id = genre_selected,
+            bg_image = form.image.data,
+            download_link = form.download_link.data,
+        )
 
+        db.session.add(new_game)
+        db.session.commit()
+
+        flash("Game added with successfully!", "success")
+        return redirect(url_for('games_admin.games_list'))
     return render_template('./admin/pages/games/add_game.html', title = title, form = form, genres = genres)
 
 

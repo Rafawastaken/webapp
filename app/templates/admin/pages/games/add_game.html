@@ -22,10 +22,15 @@
           {{form.rating(placeholder="Game Rating", class='form-control')}}
         </div>
         <div class="mb-3">
-          {{form.image(placeholder="Game Image Link", class='form-control')}}
+          {{form.release_data(placeholder="Game Release Date",
+          class='form-control')}}
         </div>
         <div class="mb-3">
-          <select value="" id="genre" name="genre" class="form-select" required>
+          {{form.image(placeholder="Game Image Link", class='form-control')}}
+        </div>
+        <!-- Genre selection -->
+        <div class="mb-3">
+          <select id="genre" name="genre" class="form-select" required>
             <option value="" selected>Select Genre</option>
             Select Game Genre {% for genre in genres%}
             <option value="{{genre.id}}">{{genre.name}}</option>
@@ -34,7 +39,8 @@
         </div>
 
         <div class="mb-3">
-          {{form.image(placeholder="Download Link", class='form-control')}}
+          {{form.download_link(placeholder="Download Link",
+          class='form-control')}}
         </div>
 
         <div class="row">
@@ -42,7 +48,7 @@
             <input
               type="submit"
               class="btn btn-dark form-control"
-              value="Add New User"
+              value="Add Game"
             />
           </div>
           <div class="col-6">
