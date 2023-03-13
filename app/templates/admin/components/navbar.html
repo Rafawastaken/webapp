@@ -29,7 +29,7 @@
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle nav-link-edited"
-            href="#"
+            href="{{url_for('games_admin.games_list')}}"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -38,8 +38,14 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="#">List</a>
-              <a class="dropdown-item" href="#">Config</a>
+              <a
+                class="dropdown-item"
+                href="{{url_for('games_admin.games_list')}}"
+                >List</a
+              >
+              <a class="dropdown-item" href="{{url_for('games_admin.genres')}}"
+                >Genres</a
+              >
             </li>
           </ul>
         </li>

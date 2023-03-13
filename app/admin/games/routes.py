@@ -2,13 +2,13 @@ from flask import Blueprint, request, render_template, url_for, flash, redirect
 from flask_login import login_required
 
 from app import db
-from .forms import AddGenreForm
+from .forms import AddGameForm, AddGenreForm
 from .models import Game, Genre
 
 # Blueprint
 games_admin = Blueprint('games_admin', __name__)
 
-###### * Game Management * ######
+###### * Games * ######
 
 # List all games
 @games_admin.route('/')
@@ -17,6 +17,23 @@ def games_list():
     games = Game.query.all()
     return render_template('./admin/pages/games/games.html')
 
+
+# Add games
+@games_admin.route('/add-game', methods = ['POST', 'GET'])
+def add_game():
+    title = "Add Games to Website"
+    form = AddGameForm()
+    genres = Genre.query.all()
+
+    if form.validate_on_submit():
+        flash("Game added with successfully!", "success")
+        return redirect(url_for('games_admin.game_list'))
+
+    return render_template('./admin/pages/games/add_game.html', title = title, form = form, genres = genres)
+
+
+
+###### * Genres * ######
 
 # Add/View Genres
 @games_admin.route('/add-genre', methods = ['POST', 'GET'])
@@ -37,7 +54,7 @@ def genres():
 
     return render_template('./admin/pages/games/genres.html', form = form, title = title, genres = genres)
 
-# Delte genre
+# Delete genre
 @games_admin.route('/delete-genre/<int:id>', methods = ['POST'])
 @login_required
 def delete_genre(id):
@@ -47,8 +64,3 @@ def delete_genre(id):
     flash("Genre was deleted!", "success")
     return redirect(url_for('games_admin.genres'))
 
-# Add games
-@games_admin.route('/add-game', methods = ['POST', 'GET'])
-@login_required
-def add_game():
-    ...
